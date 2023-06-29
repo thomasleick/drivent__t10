@@ -10,7 +10,7 @@ async function getAddressFromCEP(cep: string) {
   // FIXME: está com CEP fixo!
   const result = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
 
-  if (result.data.erro) {
+  if (result?.data?.erro || !result?.data) {
     throw notFoundError();
   }
 
@@ -65,10 +65,8 @@ async function createOrUpdateEnrollmentWithAddress(params: CreateOrUpdateEnrollm
     console.error('A data de aniversário é inválida.');
     return;
   }
-  const enrollment = { ...exclude(params, 'address'), birthday: birthdayIso };
+  const enrollment = { ...exclude(params, 'address') /* , birthday: birthdayIso */ };
   const newEnrollment = await enrollmentRepository.upsert(params.userId, enrollment, exclude(enrollment, 'userId'));
-
-  console.log(newEnrollment);
 
   await addressRepository.upsert(newEnrollment.id, address, address);
 }
