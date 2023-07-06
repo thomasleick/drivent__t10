@@ -51,7 +51,7 @@ const ticketsService = {
       return ticketWithTypeInfo;
     } else {
       // Enrollment não encontrado para o usuário
-      throw new Error('Nenhum enrollment encontrado para o usuário.');
+      throw new Error('NO_ENROLLMENT');
     }
   },
 };

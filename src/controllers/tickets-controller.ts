@@ -24,6 +24,8 @@ export const postTicket = async (req: Request, res: Response) => {
         const newTicket = await ticketsService.createTicket(req.body.ticketTypeId, res.locals.userId);
         return res.status(httpStatus.CREATED).send(newTicket);
     } catch (error) {
+        if (error.message === 'NO_ENROLLMENT' || error.name === 'NotFoundError')
+            return res.sendStatus(httpStatus.NOT_FOUND);
         return res.status(httpStatus.BAD_REQUEST).send([]);
     }
 }
