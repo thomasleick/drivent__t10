@@ -43,6 +43,6 @@ export const putBooking = async (req: AuthenticatedRequest, res: Response) => {
     } catch (error) {
         if (error.name === 'FullRoomError') return res.sendStatus(httpStatus.FORBIDDEN);
         if (error.name === 'NotFoundError') return res.sendStatus(httpStatus.NOT_FOUND);
-        return res.sendStatus(httpStatus.PAYMENT_REQUIRED);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
