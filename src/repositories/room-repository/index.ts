@@ -1,6 +1,6 @@
 import { prisma } from '@/config';
 
-async function deleteRoom(roomId: number) {
+const deleteRoom = async (roomId: number) => {
     return prisma.room.delete({
         where: {
             id: roomId,
@@ -8,7 +8,7 @@ async function deleteRoom(roomId: number) {
     });
 }
 
-async function findRoomById(roomId: number) {
+const findRoomById = async (roomId: number) => {
     return prisma.room.findUnique({
         where: { id: roomId },
     });
