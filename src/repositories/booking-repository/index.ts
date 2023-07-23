@@ -19,8 +19,26 @@ const getBookings = async (userId: number) => {
     }
 };
 
+const getBookingsByRoomId = async (roomId: number) => {
+    return prisma.booking.count({
+        where: { roomId },
+    });
+}
+
+const postBooking = async (userId: number, roomId: number) => {
+    return prisma.booking.create({
+        data: {
+            userId,
+            roomId,
+            updatedAt: new Date(),
+        },
+    });
+}
+
 const bookingRepository = {
     getBookings,
+    getBookingsByRoomId,
+    postBooking,
 };
 
 export default bookingRepository;
