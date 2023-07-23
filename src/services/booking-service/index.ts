@@ -43,7 +43,8 @@ const postBooking = async (userId: number, roomId: number) => {
 };
 
 const putBooking = async (userId: number, bookingId: number, roomId: number) => {
-    const foundBooking = await getBookings(userId);
+    const foundBookings = await bookingRepository.getBookings(userId);
+    const foundBooking = foundBookings[0]
     if (!foundBooking) {
         throw fullRoomError();
     }
