@@ -34,7 +34,7 @@ const postBooking = async (userId: number, roomId: number) => {
     if (!room) {
         throw notFoundError();
     }
-    if (room.capacity >= bookingsByRoomId) {
+    if (room.capacity <= bookingsByRoomId) {
         throw fullRoomError();
     }
 
@@ -54,7 +54,7 @@ const putBooking = async (userId: number, bookingId: number, roomId: number) => 
     }
 
     const bookingsByRoomId = await bookingRepository.getBookingsByRoomId(roomId);
-    if (room.capacity >= bookingsByRoomId) {
+    if (room.capacity <= bookingsByRoomId) {
         throw fullRoomError();
     }
 

@@ -22,7 +22,7 @@ export const postBooking = async (req: AuthenticatedRequest, res: Response) => {
 
     try {
         const bookingId = await bookingService.postBooking(userId, roomId);
-        return res.status(httpStatus.OK).send(bookingId); // { bookingId }
+        return res.status(httpStatus.OK).send({ bookingId });
 
     } catch (error) {
         if (error.name === 'FullRoomError') return res.sendStatus(httpStatus.FORBIDDEN);
